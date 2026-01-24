@@ -1,5 +1,9 @@
-package com.alura.foro.model;
+package com.alura.foro.domain.topico;
 
+import com.alura.foro.domain.curso.Curso;
+import com.alura.foro.domain.respuesta.Respuesta;
+import com.alura.foro.domain.topico.dto.DatosCrearTopico;
+import com.alura.foro.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="topicos")
-@AllArgsConstructor @NoArgsConstructor
-@Getter @Setter
+@Table(name = "topicos")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +38,7 @@ public class Topico {
     private StatusTopico status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="autor_id", nullable = false)
+    @JoinColumn(name = "autor_id", nullable = false)
     private Usuario autor;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,4 +47,13 @@ public class Topico {
 
     @OneToMany(mappedBy = "topico", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Respuesta> respuestas = new ArrayList<>();
+
+    public Topico(DatosCrearTopico datos, Usuario autor, Curso curso) {
+        this.titulo = datos.titulo();
+        this.mensaje = datos.mensaje();
+        this.fechaCreacion = LocalDateTime.now();
+        this.status = StatusTopico.NO_RESPONDIDO;
+        this.autor = autor;
+        this.curso = curso;
+    }
 }

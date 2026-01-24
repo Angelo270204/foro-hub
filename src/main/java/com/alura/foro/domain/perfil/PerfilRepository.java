@@ -1,6 +1,5 @@
-package com.alura.foro.repository;
+package com.alura.foro.domain.perfil;
 
-import com.alura.foro.model.Perfil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

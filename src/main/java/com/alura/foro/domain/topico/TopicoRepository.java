@@ -1,6 +1,5 @@
-package com.alura.foro.repository;
+package com.alura.foro.domain.topico;
 
-import com.alura.foro.model.Topico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

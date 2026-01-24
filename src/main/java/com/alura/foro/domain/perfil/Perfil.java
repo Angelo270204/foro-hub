@@ -1,5 +1,6 @@
-package com.alura.foro.model;
+package com.alura.foro.domain.perfil;
 
+import com.alura.foro.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
