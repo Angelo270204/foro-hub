@@ -5,13 +5,11 @@ import com.alura.foro.domain.topico.dto.DatosCrearTopico;
 import com.alura.foro.domain.topico.dto.DatosRespuestaTopico;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/topicos")
@@ -31,5 +29,10 @@ public class TopicoController {
                 .toUri();
 
         return ResponseEntity.created(url).body(datosRespuesta);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DatosRespuestaTopico>> listarTopicos(){
+        return ResponseEntity.ok(topicoService.obtenerTopicos());
     }
 }

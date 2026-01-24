@@ -22,8 +22,11 @@ public class TopicoService {
         this.cursoRepository = cursoRepository;
     }
 
-    public List<Topico> obtenerTopicos(){
-        return topicoRepository.findAll();
+    public List<DatosRespuestaTopico> obtenerTopicos(){
+        return topicoRepository.findAll()
+                .stream()
+                .map(DatosRespuestaTopico::new)
+                .toList();
     }
 
     public DatosRespuestaTopico crearTopico(DatosCrearTopico datos) {
