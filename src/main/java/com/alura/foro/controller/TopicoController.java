@@ -2,6 +2,7 @@ package com.alura.foro.controller;
 
 import com.alura.foro.domain.topico.TopicoService;
 import com.alura.foro.domain.topico.dto.DatosCrearTopico;
+import com.alura.foro.domain.topico.dto.DatosDetalleTopico;
 import com.alura.foro.domain.topico.dto.DatosRespuestaTopico;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +35,11 @@ public class TopicoController {
     @GetMapping
     public ResponseEntity<List<DatosRespuestaTopico>> listarTopicos(){
         return ResponseEntity.ok(topicoService.obtenerTopicos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosDetalleTopico> obtenerTopicoPorId(@PathVariable Long id){
+        DatosDetalleTopico datosRespuesta = topicoService.obtenerTopicoPorId(id);
+        return ResponseEntity.ok(datosRespuesta);
     }
 }
