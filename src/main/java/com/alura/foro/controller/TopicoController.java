@@ -1,6 +1,7 @@
 package com.alura.foro.controller;
 
 import com.alura.foro.domain.topico.TopicoService;
+import com.alura.foro.domain.topico.dto.DatosActualizarTopico;
 import com.alura.foro.domain.topico.dto.DatosCrearTopico;
 import com.alura.foro.domain.topico.dto.DatosDetalleTopico;
 import com.alura.foro.domain.topico.dto.DatosRespuestaTopico;
@@ -33,13 +34,19 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DatosRespuestaTopico>> listarTopicos(){
+    public ResponseEntity<List<DatosRespuestaTopico>> listarTopicos() {
         return ResponseEntity.ok(topicoService.obtenerTopicos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DatosDetalleTopico> obtenerTopicoPorId(@PathVariable Long id){
+    public ResponseEntity<DatosDetalleTopico> obtenerTopicoPorId(@PathVariable Long id) {
         DatosDetalleTopico datosRespuesta = topicoService.obtenerTopicoPorId(id);
+        return ResponseEntity.ok(datosRespuesta);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DatosRespuestaTopico> actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datosActualizar) {
+        DatosRespuestaTopico datosRespuesta = topicoService.actualizarTopico(id,datosActualizar);
         return ResponseEntity.ok(datosRespuesta);
     }
 }

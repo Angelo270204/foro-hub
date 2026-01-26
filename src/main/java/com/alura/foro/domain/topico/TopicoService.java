@@ -2,6 +2,7 @@ package com.alura.foro.domain.topico;
 
 import com.alura.foro.domain.curso.Curso;
 import com.alura.foro.domain.curso.CursoRepository;
+import com.alura.foro.domain.topico.dto.DatosActualizarTopico;
 import com.alura.foro.domain.topico.dto.DatosCrearTopico;
 import com.alura.foro.domain.topico.dto.DatosDetalleTopico;
 import com.alura.foro.domain.topico.dto.DatosRespuestaTopico;
@@ -9,6 +10,7 @@ import com.alura.foro.domain.usuario.Usuario;
 import com.alura.foro.domain.usuario.UsuarioRepository;
 import com.alura.foro.domain.EntidadNoEncontradaException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,13 +26,14 @@ public class TopicoService {
         this.cursoRepository = cursoRepository;
     }
 
-    public List<DatosRespuestaTopico> obtenerTopicos(){
+    public List<DatosRespuestaTopico> obtenerTopicos() {
         return topicoRepository.findAll()
                 .stream()
                 .map(DatosRespuestaTopico::new)
                 .toList();
     }
 
+    @Transactional
     public DatosRespuestaTopico crearTopico(DatosCrearTopico datos) {
         Usuario autor = usuarioRepository.findById(datos.autor_id())
                 .orElseThrow(() -> new EntidadNoEncontradaException("Usuario no encontrado"));
@@ -45,8 +48,33 @@ public class TopicoService {
         return new DatosRespuestaTopico(topicoGuardado);
     }
 
-    public DatosDetalleTopico obtenerTopicoPorId(Long id){
-        Topico topico = topicoRepository.findById(id).orElseThrow(()->new EntidadNoEncontradaException("El Id ingresado no existe"));
+    public DatosDetalleTopico obtenerTopicoPorId(Long id) {
+        Topico topico = topicoRepository.findById(id).orElseThrow(() -> new EntidadNoEncontradaException("El Id ingresado no existe"));
         return new DatosDetalleTopico(topico);
+    }
+
+    @Transactional
+    public DatosRespuestaTopico actualizarTopico(Long id, DatosActualizarTopico datosTopico) {
+        Topico topico = topicoRepository.findById(id).orElseThrow(()->new EntidadNoEncontradaException("El Id ingresado no existe"));
+
+        if(!datosTopico.validarMinimoUnDato()){
+            throw new DatoMinimoException("Tiene que ingresar minimo un dato para modificar");
+        }
+
+        if (datosTopico.autor_id() != null) {
+            Usuario nuevoAutor = usuarioRepository.findById(datosTopico.autor_id())
+                    .orElseThrow(() -> new EntidadNoEncontradaException("Usuario no encontrado"));
+            topico.setAutor(nuevoAutor);
+        }
+
+        if (datosTopico.curso_id() != null) {
+            Curso nuevoCurso = cursoRepository.findById(datosTopico.curso_id())
+                    .orElseThrow(() -> new EntidadNoEncontradaException("Curso no encontrado"));
+            topico.setCurso(nuevoCurso);
+        }
+
+        topico.actualizarDatos(datosTopico);
+
+        return new DatosRespuestaTopico(topico);
     }
 }

@@ -2,6 +2,7 @@ package com.alura.foro.domain.topico;
 
 import com.alura.foro.domain.curso.Curso;
 import com.alura.foro.domain.respuesta.Respuesta;
+import com.alura.foro.domain.topico.dto.DatosActualizarTopico;
 import com.alura.foro.domain.topico.dto.DatosCrearTopico;
 import com.alura.foro.domain.usuario.Usuario;
 import jakarta.persistence.*;
@@ -25,10 +26,10 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String titulo;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String mensaje;
 
     @Column(name = "fecha_creacion", nullable = false)
@@ -55,5 +56,19 @@ public class Topico {
         this.status = StatusTopico.NO_RESPONDIDO;
         this.autor = autor;
         this.curso = curso;
+    }
+
+    public void actualizarDatos(DatosActualizarTopico datos) {
+        if (datos.titulo() != null) {
+            this.titulo = datos.titulo();
+        }
+
+        if (datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+        }
+
+        if (datos.status() != null) {
+            this.status = datos.status();
+        }
     }
 }
