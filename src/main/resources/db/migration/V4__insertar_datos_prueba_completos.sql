@@ -1,17 +1,18 @@
 -- ========================================
 -- INSERTAR USUARIOS (10)
+-- Contraseña para todos: "1234"
 -- ========================================
 INSERT INTO usuarios (nombre, correo_electronico, contrasena) VALUES
-('Ana García', 'ana.garcia@foro.com', '$2a$10$hash1'),
-('Carlos Ruiz', 'carlos.ruiz@foro.com', '$2a$10$hash2'),
-('María López', 'maria.lopez@foro.com', '$2a$10$hash3'),
-('Pedro Martínez', 'pedro.martinez@foro.com', '$2a$10$hash4'),
-('Laura Sánchez', 'laura.sanchez@foro.com', '$2a$10$hash5'),
-('Diego Torres', 'diego.torres@foro.com', '$2a$10$hash6'),
-('Sofia Ramírez', 'sofia.ramirez@foro.com', '$2a$10$hash7'),
-('Miguel Flores', 'miguel.flores@foro.com', '$2a$10$hash8'),
-('Valentina Cruz', 'valentina.cruz@foro.com', '$2a$10$hash9'),
-('Sebastián Díaz', 'sebastian.diaz@foro.com', '$2a$10$hash10');
+('Ana García', 'ana.garcia@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Carlos Ruiz', 'carlos.ruiz@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('María López', 'maria.lopez@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Pedro Martínez', 'pedro.martinez@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Laura Sánchez', 'laura.sanchez@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Diego Torres', 'diego.torres@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Sofia Ramírez', 'sofia.ramirez@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Miguel Flores', 'miguel.flores@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Valentina Cruz', 'valentina.cruz@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy'),
+('Sebastián Díaz', 'sebastian.diaz@foro.com', '$2a$12$Q73TswE9ky6Ck.noJccxDuSAo/uBH2keghgdVdKW22xUCo6blduNy');
 
 -- ========================================
 -- INSERTAR CURSOS (10)

@@ -1,8 +1,7 @@
 -- Insertar un usuario (Autor)
--- La contraseña idealmente debería estar hasheada con BCrypt,
--- pero para prueba rápida pon un string cualquiera si no tienes validación fuerte aún.
+-- Contraseña: "1234" hasheada con BCrypt
 INSERT INTO usuarios (nombre, correo_electronico, contrasena)
-VALUES ('Juan Perez', 'juan.perez@voll.med', '123456');
+VALUES ('Juan Perez', 'juan.perez@voll.med', '$2a$10$xn3LI/AjqicFYZFruSwve.681477XaVNaUQbr1gioaWPn4t1KoYFu');
 
 -- Insertar un curso
 INSERT INTO cursos (nombre, categoria)
