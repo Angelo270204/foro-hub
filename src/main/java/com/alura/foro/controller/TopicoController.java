@@ -49,4 +49,10 @@ public class TopicoController {
         DatosRespuestaTopico datosRespuesta = topicoService.actualizarTopico(id,datosActualizar);
         return ResponseEntity.ok(datosRespuesta);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarTopico(@PathVariable Long id){
+        topicoService.eliminarTopico(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,5 +1,6 @@
 package com.alura.foro.domain.topico;
 
+import com.alura.foro.domain.EntidadNoEncontradaException;
 import com.alura.foro.domain.curso.Curso;
 import com.alura.foro.domain.curso.CursoRepository;
 import com.alura.foro.domain.topico.dto.DatosActualizarTopico;
@@ -8,7 +9,6 @@ import com.alura.foro.domain.topico.dto.DatosDetalleTopico;
 import com.alura.foro.domain.topico.dto.DatosRespuestaTopico;
 import com.alura.foro.domain.usuario.Usuario;
 import com.alura.foro.domain.usuario.UsuarioRepository;
-import com.alura.foro.domain.EntidadNoEncontradaException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,5 +76,14 @@ public class TopicoService {
         topico.actualizarDatos(datosTopico);
 
         return new DatosRespuestaTopico(topico);
+    }
+
+    @Transactional
+    public void eliminarTopico(Long id){
+        if(!topicoRepository.existsById(id)){
+            throw new EntidadNoEncontradaException("El Id ingresado no existe");
+        }
+
+        topicoRepository.deleteById(id);
     }
 }
