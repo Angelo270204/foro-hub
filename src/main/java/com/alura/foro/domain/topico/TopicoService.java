@@ -3,6 +3,8 @@ package com.alura.foro.domain.topico;
 import com.alura.foro.domain.EntidadNoEncontradaException;
 import com.alura.foro.domain.curso.Curso;
 import com.alura.foro.domain.curso.CursoRepository;
+import com.alura.foro.domain.respuesta.Respuesta;
+import com.alura.foro.domain.respuesta.dto.DatosRespuesta;
 import com.alura.foro.domain.topico.dto.DatosActualizarTopico;
 import com.alura.foro.domain.topico.dto.DatosCrearTopico;
 import com.alura.foro.domain.topico.dto.DatosDetalleTopico;
@@ -85,5 +87,13 @@ public class TopicoService {
         }
 
         topicoRepository.deleteById(id);
+    }
+
+    public List<DatosRespuesta> respuestasPorTopico(Long id){
+        List<Respuesta> respuestasTopico = topicoRepository.buscarRespuestasPorTopico(id);
+
+        return respuestasTopico.stream()
+                .map(DatosRespuesta::new)
+                .toList();
     }
 }

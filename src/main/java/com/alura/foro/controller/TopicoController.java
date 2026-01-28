@@ -1,5 +1,6 @@
 package com.alura.foro.controller;
 
+import com.alura.foro.domain.respuesta.dto.DatosRespuesta;
 import com.alura.foro.domain.topico.TopicoService;
 import com.alura.foro.domain.topico.dto.DatosActualizarTopico;
 import com.alura.foro.domain.topico.dto.DatosCrearTopico;
@@ -42,6 +43,13 @@ public class TopicoController {
     public ResponseEntity<DatosDetalleTopico> obtenerTopicoPorId(@PathVariable Long id) {
         DatosDetalleTopico datosRespuesta = topicoService.obtenerTopicoPorId(id);
         return ResponseEntity.ok(datosRespuesta);
+    }
+
+    @GetMapping("/{id}/respuestas")
+    public ResponseEntity<List<DatosRespuesta>> obtenerRespuestasPorTopico(@PathVariable Long id){
+        var respuestasTopico = topicoService.respuestasPorTopico(id);
+
+        return ResponseEntity.ok(respuestasTopico);
     }
 
     @PutMapping("/{id}")
