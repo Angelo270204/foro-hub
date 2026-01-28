@@ -1,6 +1,7 @@
 package com.alura.foro.infra.exception;
 
 import com.alura.foro.domain.EntidadNoEncontradaException;
+import com.alura.foro.domain.curso.CursoDuplicadoException;
 import com.alura.foro.domain.topico.DatoMinimoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,12 @@ public class ManejadorExcepciones {
     public ResponseEntity<DatosError> manejarPeticionSinDatos(DatoMinimoException ex){
         var error = new DatosError(ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(CursoDuplicadoException.class)
+    public ResponseEntity<DatosError> manejarCursoDuplicado(CursoDuplicadoException ex){
+        var error = new DatosError(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

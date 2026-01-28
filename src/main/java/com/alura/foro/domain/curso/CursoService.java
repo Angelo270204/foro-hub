@@ -1,5 +1,7 @@
 package com.alura.foro.domain.curso;
 
+import com.alura.foro.domain.curso.dto.DatosCrearCurso;
+import com.alura.foro.domain.curso.dto.DatosCurso;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +15,19 @@ public class CursoService {
         this.cursoRepository = cursoRepository;
     }
 
-    public List<Curso> listarCursos() {
-        return cursoRepository.findAll();
+    public List<DatosCurso> listarCursos() {
+        return cursoRepository.findAll().stream()
+                .map(DatosCurso::new)
+                .toList();
     }
 
     @Transactional
-    public Curso crearCurso(Curso curso){
-        return cursoRepository.save(curso);
+    public DatosCurso crearCurso(DatosCrearCurso curso) {
+        if (cursoRepository.existsByNombre(curso.nombre())) {
+            throw new CursoDuplicadoException("Ya existe un curso con el nombre: " + curso.nombre());
+        }
+        Curso datos = cursoRepository.save(new Curso(curso));
+        return new DatosCurso(datos);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.alura.foro.domain.curso;
 
+import com.alura.foro.domain.curso.dto.DatosCrearCurso;
 import com.alura.foro.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,4 +28,9 @@ public class Curso {
 
     @OneToMany(mappedBy = "curso",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Topico> topicos = new ArrayList<>();
+
+    public Curso(DatosCrearCurso datosCurso){
+        this.nombre=datosCurso.nombre();
+        this.categoria=datosCurso.categoria();
+    }
 }
